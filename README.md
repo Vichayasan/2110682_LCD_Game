@@ -1,6 +1,7 @@
 ## Reference vs. Modifications
 Based on the reference provided (Muhamd Magdy's single-player dinosaur/runner game), this project has undergone a massive architectural overhaul.
 Original Source Features (Muhamd Magdy):
+
 •	Genre: Single-player infinite runner (similar to the Chrome Dinosaur game).</br>
 •	Mechanics: One player jumps over randomly generated obstacles moving from right to left.</br>
 •	Input: Single button, typically read using standard polling in the loop().</br>
@@ -16,6 +17,7 @@ Original Source Features (Muhamd Magdy):
 
 ## Hardware Design
 The hardware is designed around the specific pinout of the Arduino Mega2560, utilizing its extended interrupt capabilities.
+
 •	Display: A standard 16x2 LCD using a 4-bit parallel interface (RS=12, E=11, D4=5, D5=6, D6=7, D7=8).</br>
 •	Player 1 Inputs:
   -	Jump: Pin 2 (External Interrupt INT0)
