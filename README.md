@@ -31,6 +31,7 @@ The hardware is designed around the specific pinout of the Arduino Mega2560, uti
 The game operates on a continuous loop driven by a state machine and a custom rendering engine.
 Interrupts & Debouncing
 Instead of polling button states, the code uses Interrupt Service Routines (ISRs) like onJump01() and onFire01().
+
 •	When a button is pressed, the hardware immediately halts the main program to run the ISR.
 
 •	Inside the ISR, a non-blocking millis() check ensures that at least 50 milliseconds (DEBOUNCE_MS) have passed since the last press. This debouncing prevents mechanical switch noise from registering as multiple rapid presses.
@@ -39,12 +40,14 @@ Instead of polling button states, the code uses Interrupt Service Routines (ISRs
 
 ## The Hero State Machine
 Each player's character is controlled by a 14-step state machine defined by the HERO_POSITION_* macros.
+
 •	Running (Lower & Upper): States 1-3 and 12-14 cycle the character through three custom animation frames (HERO1_RUN1, HERO1_RUN2, HERO1_RUN3) to simulate legs moving.
 
 •	Jumping: States 4-11 handle the jump arc. When a player presses jump, the state is forced to HERO_POSITION_JUMP_1. As the loop ticks forward via the advanceHero() function, the character ascends to the top row, stays there briefly, and falls back down.
 
 ## Combat System
 The combat system relies on the Bullet struct, which tracks the bullet's X-coordinate, Y-coordinate (row 0 or 1), travel direction (+1 for P1, -1 for P2), and active status.
+
 •	Spawning: Pressing fire calls spawnBullet(). It checks which row the hero is currently on using getHeroRow() and spawns the bullet directly in front of them.
 
 •	Movement: moveBullet() increments or decrements the bullet's X-position. If it travels off the 16-character screen, it despawns.
